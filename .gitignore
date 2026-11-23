@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+# Data is not redistributed in this repo (see README)
+*.csv
+metrics.json
+submission.csv
