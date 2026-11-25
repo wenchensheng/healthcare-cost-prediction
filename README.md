@@ -9,6 +9,7 @@ gradient boosting — built and validated end to end on Kaggle.
 |---|---|
 | `public_medical_cost_baseline.py` | Complete, verified baseline on the public *Medical Cost Personal* dataset (1,338 rows): EDA, feature engineering, 5-fold cross-validation, metrics reported on the original cost scale. |
 | `vietnam_competition_baseline.py` | The same pipeline adapted to the Kaggle competition *Predictive Modeling for Healthcare Costs in Vietnam* (evaluation metric: RMSE) — predicts total annual healthcare cost, with explicit leakage guards and a submission writer in the sample format. |
+| [`kaggle-vietnam/`](kaggle-vietnam/) | **Full writeup of the completed competition run**: four submissions, best public leaderboard RMSE **2.28194 (23rd of 78 teams)**, the household/segment feature engineering behind it, experiment log and final training code. |
 
 ## Approach
 
@@ -35,6 +36,17 @@ gradient boosting — built and validated end to end on Kaggle.
 
 Fold RMSEs: 4,474.44 / 4,738.70 / 4,241.65 / 4,996.99 / 5,060.64
 
+## Kaggle Competition — Healthcare Cost Prediction (Vietnam)
+
+Four submissions to the Kaggle community competition *Predictive Modeling
+for Healthcare Costs in Vietnam*, improving the public leaderboard RMSE
+from 2.69057 to **2.28194 — 23rd of 78 teams** (as of Nov 25, 2026). The
+gains came from structure, not tuning: the target is exactly
+`log1p(outpatient + inpatient cost)` and 81.7% zeros, households are split
+across train/test (exploited with strictly out-of-fold household features),
+and ID prefixes encode geographic blocks (target-encoded). Full writeup,
+experiment log and final code: **[`kaggle-vietnam/`](kaggle-vietnam/)**.
+
 ## Running it
 
 Both scripts are written as Kaggle kernels — they read inputs from
@@ -55,18 +67,17 @@ pip install -r requirements.txt
 
 ## Competition pipeline status
 
-`vietnam_competition_baseline.py` is staged and code-reviewed but has **not**
-been run against competition data: the competition files become available
-only after joining the competition on Kaggle, and the exact target-column
-definition lives in the competition's `descriptions.xlsx`. The script
-resolves the target from a candidate list and, if none matches, stops and
-prints every train column instead of guessing. Competition data is not
-redistributed in this repository.
+The competition entry is **complete**: the target and auxiliary columns
+were resolved from the competition's `descriptions.xlsx`, the baseline
+above was run and then extended through four submissions (best public
+leaderboard RMSE 2.28194, 23rd of 78 teams as of Nov 25, 2026). See
+[`kaggle-vietnam/`](kaggle-vietnam/) for the full writeup. Competition data
+is not redistributed in this repository.
 
 ## Next steps
 
-- Resolve the competition target and auxiliary column names from
-  `descriptions.xlsx` on the first real run
+- Two-level segment × household random effects and cost-tier modeling of
+  positive costs (see `kaggle-vietnam/` "What's next")
 - v2: frequency × severity decomposition — separate models for utilization
   counts and cost per event, multiplied for the total
 - Hyperparameter tuning and residual calibration on the log scale
