@@ -1,10 +1,10 @@
 # Kaggle: Predictive Modeling for Healthcare Costs in Vietnam
 
-**Community competition · RMSE · 23rd of 78 teams (as of Nov 25, 2026) · Best public leaderboard score: 2.28194**
+**Community competition · RMSE · 12th of 78 teams (as of Nov 25, 2026) · Best public leaderboard score: 2.25342**
 
 Predicting one year of individual healthcare cost from Vietnamese social
 health insurance records. This folder documents a complete competition run:
-four submissions, a −15% RMSE improvement from first to last, and the three
+five submissions, a −16% RMSE improvement from first to last, and the
 structural findings that produced almost all of it. The final training script
 is in [`code/`](code/); the full experiment log is in
 [`RESULTS.md`](RESULTS.md).
@@ -80,9 +80,20 @@ classifier's AUC from 0.8359 to 0.8453 and cut CV by a further ~0.02.
 | v2 | HistGradientBoosting, Poisson loss, raw scale | 2.5441 | 2.54565 | — |
 | v3 | Calibrated weighted blend of tournament models | 2.5421 | 2.54577 | 59th of 78 |
 | v4 | Household + segment features, hurdle ensemble blend | 2.3006 | **2.28194** | **23rd of 78** |
+| v6 | Household age-composition features + CatBoost hurdle blend | ≈2.276 | **2.25342** | **12th of 78** |
 
 *(Standing as of Nov 25, 2026; the leaderboard is still open and positions
 can move.)*
+
+### Update — v6 (Nov 25, 2026)
+
+A further iteration round found one more piece of signal the earlier
+feature set had missed: **household age composition** — who else is in the
+household and where the target person sits in its age order (household
+age-band counts, within-household age position, the youngest member's
+age). Adding those features, plus a CatBoost hurdle model for blend
+diversity, brought local CV to ≈2.276 and the public leaderboard to
+**2.25342 — 12th of 78 teams** (as of Nov 25, 2026).
 
 ## Final model (v4)
 
@@ -108,7 +119,7 @@ features.
 - One protocol throughout: **5-fold KFold (shuffled, seed 42), RMSE on the
   original scale, predictions clipped at 0.** Every candidate model in
   [`RESULTS.md`](RESULTS.md) was judged on this protocol and nothing else.
-- The leaderboard was used sparingly — four submissions total — and local CV
+- The leaderboard was used sparingly — five submissions total — and local CV
   tracked it closely (v2: CV 2.5441 vs LB 2.54565; v3: 2.5421 vs 2.54577;
   v4: 2.3006 vs 2.28194, where the household/segment features generalized
   slightly *better* on the public split than CV suggested).

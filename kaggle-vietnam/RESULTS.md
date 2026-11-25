@@ -124,3 +124,14 @@ statistics, never as a row's own features):
   joint model using the visit-frequency structure.
 - Discipline note: this entire round was iterated on local CV only; the
   leaderboard received exactly one submission (v4) at the end.
+
+## Postscript — v6 round (Nov 25, 2026)
+
+A later iteration round found one more signal source the feature set above
+had missed: **household age-composition features** (household age-band
+counts, the target's position in the household age order, the youngest
+member's age), plus a CatBoost hurdle model added to the blend for
+diversity. Honest local CV ≈ 2.276, versus 2.3006 for the v4 blend logged
+above. Submitted as v6: **public leaderboard 2.25342, 12th of 78 teams**
+(as of Nov 25, 2026). The v4 results above stand unchanged — they are the
+record of the v4 round.
