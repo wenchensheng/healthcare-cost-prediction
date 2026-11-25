@@ -49,6 +49,8 @@ and ID prefixes encode geographic blocks (target-encoded). A final round
 to the blend. Full writeup, experiment log and final code:
 **[`kaggle-vietnam/`](kaggle-vietnam/)**.
 
+![Leaderboard RMSE by submission: 2.69057 (v1) → 2.25342 (v6), 12th of 78 teams](kaggle-vietnam/results-progression.svg)
+
 ## Running it
 
 Both scripts are written as Kaggle kernels — they read inputs from

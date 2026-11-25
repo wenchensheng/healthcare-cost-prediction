@@ -9,6 +9,8 @@ structural findings that produced almost all of it. The final training script
 is in [`code/`](code/); the full experiment log is in
 [`RESULTS.md`](RESULTS.md).
 
+![Leaderboard RMSE by submission: 2.69057 (v1) → 2.25342 (v6), 12th of 78 teams](results-progression.svg)
+
 ## The problem and the data
 
 - **Task:** predict each insured person's total healthcare cost for the year
