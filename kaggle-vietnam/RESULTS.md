@@ -135,3 +135,18 @@ diversity. Honest local CV ≈ 2.276, versus 2.3006 for the v4 blend logged
 above. Submitted as v6: **public leaderboard 2.25342, 12th of 78 teams**
 (as of Nov 25, 2026). The v4 results above stand unchanged — they are the
 record of the v4 round.
+
+## Postscript — v7 round (Nov 25, 2026)
+
+Two further rounds (7–8) attacked the classification ceiling from the
+target's own structure. Round 7 showed the outpatient component alone is
+more predictable than any-cost overall (AUC 0.8599 for P(outpatient > 0)
+versus the ~0.850 any-cost ceiling every earlier classifier had hit);
+round 8 built a joint four-state model (no cost / outpatient only /
+inpatient only / both) with state-conditional magnitude models, whose
+member (standalone OOF RMSE 2.2812) joined the full model pool under an
+NNLS/Ridge meta-blend. A dedicated inpatient feature block gave no gain
+(P(inpatient > 0) AUC +0.0007, noise) and was rejected. Honest meta-CV
+2.2688, versus 2.2757 for the v6 recipe. Submitted as v7: **public
+leaderboard 2.24397, 1st of 78 teams** (as of Nov 25, 2026). The v4 and
+v6 results above stand unchanged — they are the record of those rounds.
